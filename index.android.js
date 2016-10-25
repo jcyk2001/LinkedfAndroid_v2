@@ -67,13 +67,14 @@ class BottomScrollableTab extends Component {
       navTabBarTop: new Animated.Value(0),
       tabNames: ['首页', '法规库', ,'问答', '个人中心',],
       tabIconNames: ['icon1', 'icon2', 'icon3', 'icon4', ],
+      tabIconNames_active: ['icon1', 'icon2', 'icon3', 'icon4', ],
     }
     this.renderTabBar = () =>  <NavTabBar style={{ top: this.state.navTabBarTop,
       height: this.state.navTabBarTop.interpolate({
         inputRange: [0, NavTabBarH],
         outputRange: [NavTabBarH, 0]
       }),	flex: 1,justifyContent: 'center',alignItems: 'center',
-    }} tabNames={this.state.tabNames} tabIconNames={this.state.tabIconNames}/>
+    }} tabNames={this.state.tabNames} tabIconNames={this.state.tabIconNames} tabIconNames_active={this.state.tabIconNames_active}/>
     this.showTabBar = (isShow: Bool) => {
       Animated.timing( this.state.navTabBarTop, {
         toValue: isShow ? 0 : NavTabBarH
@@ -98,6 +99,10 @@ class BottomScrollableTab extends Component {
         </ScrollableTabView>
       </View>
     )
+  }
+
+  _renderTabBar(){
+    
   }
 }
 

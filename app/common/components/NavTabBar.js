@@ -17,7 +17,8 @@ export default class NavTabBar extends Component {
     activeTab: React.PropTypes.number,
     tabs: React.PropTypes.array,
     tabNames: React.PropTypes.array, // 保存Tab名称
-    tabIconNames: React.PropTypes.array, // 保存Tab图标
+    tabIconNames: React.PropTypes.array, // 保存Tab图标(未选中)
+    tabIconNames_active: React.PropTypes.array, // 保存Tab图标(选中)
   }
   constructor(props) {
     super(props)
@@ -51,33 +52,46 @@ export default class NavTabBar extends Component {
     )
   }
   renderTabOption(tab, i) {
-    const color = this.props.activeTab == i? "#2196f3" : "#ADADAD"; // 判断i是否是当前选中的tab，设置不同的颜色
+    const color = this.props.activeTab == i ? "#2196f3" : "#ADADAD"; // 判断i是否是当前选中的tab，设置不同的颜色
     var image;
-    if (i == 0) {
-        image = this.props.tabIconNames[i];
-        if (this.props.activeTab == i) {
-          image = 'home_page_courses'
-        }
+
+    // this.props.tabs.map((tab, idx) => {
+    //   return (
+    //     <TouchableOpacity key={tab} style={_styles.tab} onPress={ this._tabSwitch.bind(this, idx) }>
+    //       <Text style={ [_styles.tab_txt_style , {color: this.props.activeTab === idx ? COLOR.active : COLOR.fontcolor_grey }]}>{tab}</Text>
+    //     </TouchableOpacity>
+    //   )
+    // })
+
+    image = this.props.tabIconNames[i];
+    if (this.props.activeTab == i) {
+      image = this.props.tabIconNames_active[i];
     }
-    if (i == 1) {
-        image = this.props.tabIconNames[i];
-        if (this.props.activeTab == i) {
-          image = 'home_page_search'
-        }
-    }
-    if (i == 2) {
-        image = this.props.tabIconNames[i];
-        if (this.props.activeTab == i) {
-          image = 'home_page_mine'
-        }
-    }
+
+    // if (i == 0) {
+    //     image = this.props.tabIconNames[i];
+    //     if (this.props.activeTab == i) {
+    //       image = 'home_page_courses'
+    //     }
+    // }
+    // if (i == 1) {
+    //     image = this.props.tabIconNames[i];
+    //     if (this.props.activeTab == i) {
+    //       image = 'home_page_search'
+    //     }
+    // }
+    // if (i == 2) {
+    //     image = this.props.tabIconNames[i];
+    //     if (this.props.activeTab == i) {
+    //       image = 'home_page_mine'
+    //     }
+    // }
+
     return (
       <TouchableOpacity onPress={()=>this.props.goToPage(i)} key={i} style={styles.tab,this.props.style}>
           <View style={styles.tabItem}>
-              <Image
-                  source={{uri:image}}  // 图标
-                  style={{width:20,height:20,marginBottom:8,resizeMode: Image.resizeMode.contain}}
-                  />
+              <Image source={{uri:image}}  // 图标
+                  style={{width:20,height:20,marginBottom:8,resizeMode: Image.resizeMode.contain}} />
               <Text style={{color: color,fontSize:10}}>
                   {this.props.tabNames[i]}
               </Text>

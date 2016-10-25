@@ -20,7 +20,7 @@ import {
 export default class PgHome2 extends Component {
   render() {
     return(
-      null
+      <View><Text>Home2</Text></View>
     )
   }
 }
